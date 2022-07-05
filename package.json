@@ -1,0 +1,39 @@
+{
+  "name": "vuepress-theme-liawn",
+  "version": "1.0.0",
+  "description": "带有右侧边栏的vuepress简单主题",
+  "main": "index.js",
+  "repository": "https://github.com/liawnliu/vuepress-theme-liawn.git",
+  "author": "liawnliu",
+  "license": "MIT",
+  "devDependencies": {
+    "@commitlint/cli": "16.0.2",
+    "@commitlint/config-conventional": "16.0.0",
+    "@vue/cli-plugin-eslint": "4.5.17",
+    "@vue/cli-service": "4.5.17",
+    "@vue/eslint-config-airbnb": "5.0.2",
+    "@vue/eslint-config-prettier": "6.0.0",
+    "@vuepress/theme-default": "1.9.7",
+    "commitizen": "4.2.4",
+    "cz-conventional-changelog": "3.3.0",
+    "eslint": "6.7.2",
+    "eslint-plugin-import": "2.22.1",
+    "eslint-plugin-prettier": "3.3.1",
+    "eslint-plugin-vue": "6.2.2",
+    "husky": "7.0.4",
+    "lint-staged": "12.2.0",
+    "prettier": "2.2.1",
+    "stylelint": "13.13.1",
+    "stylelint-config-prettier": "9.0.3",
+    "stylelint-config-recess-order": "3.0.0",
+    "stylelint-prettier": "2.0.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "dependencies": {
+    "lodash.debounce": "^4.0.8"
+  }
+}
