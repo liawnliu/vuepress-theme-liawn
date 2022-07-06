@@ -8,7 +8,12 @@
       @click="toggleSidebar(false)"
     /> -->
 
-    <Sidebar :items="sidebarItems" @toggle-sidebar="toggleSidebar" :isSidebarOpen="isSidebarOpen">
+    <Sidebar
+      v-if="shouldShowSidebar"
+      :items="sidebarItems"
+      @toggle-sidebar="toggleSidebar"
+      :isSidebarOpen="isSidebarOpen"
+    >
       <template #top>
         <slot name="sidebar-top" />
       </template>
@@ -28,7 +33,11 @@
       </template>
     </Page>
     <!-- 新增RightSidebar -->
-    <RightSidebar @toggle-right-sidebar="toggleRightSidebar" :isRightSidebarOpen="isRightSidebarOpen" />
+    <RightSidebar
+      v-if="shouldShowSidebar"
+      @toggle-right-sidebar="toggleRightSidebar"
+      :isRightSidebarOpen="isRightSidebarOpen"
+    />
   </div>
 </template>
 <!-- js修改：引入RightSidebar；修改新增isSidebarOpen和isRightSidebarOpen数据；新增toggleRightSidebar方法 -->

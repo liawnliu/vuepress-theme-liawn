@@ -129,14 +129,16 @@ export default {
       this.tree = root.children;
       // 如果链接里有hash就让对应的<a>呈现active， 这里的hash暂时不需要encodeURI
       this.$nextTick(() => {
-        const target = this.changeSidebarActive({ hash: this.$route.hash });
-        // this.$route.hash对应的anchor滚动到视窗里
-        const el = document.querySelector(target);
-        // 滚动到视窗顶部
-        if (el) el.scrollIntoView();
+        if (this.$route.hash) {
+          const target = this.changeSidebarActive({ hash: this.$route.hash });
+          // this.$route.hash对应的anchor滚动到视窗里
+          const el = document.querySelector(target);
+          // 滚动到视窗顶部
+          if (el) el.scrollIntoView();
+        }
       });
     },
-    onScroll: debounce(() => {
+    onScroll: debounce(function func() {
       this.setActiveHash();
     }, 300),
     setActiveHash() {
@@ -171,7 +173,8 @@ export default {
       }
     },
     changeSidebarActive({ goal, hash }) {
-      // console.log('$route.hash', hash);
+      /* console.log('changeSidebarActive', hash);
+      console.log('changeSidebarActive', goal); */
       const tocList = document.querySelectorAll(".right-sidebar a");
       // console.log('tocList', tocList);
       let target = null;
@@ -231,5 +234,5 @@ export default {
 @media (max-width: $MQMobile)
   .right-sidebar
     & > .sidebar-links
-      padding 1rem 0h4text-aligncenterulpadding0margin5list-style-typenonelimargin05px020pxoverflowhiddentext-overflowellipsiswhite-spacenowrapacolor#2c3e50font-weight400line-height1.7&.activefont-weight500color#3eaf7c
+      padding 1rem 0
 </style>

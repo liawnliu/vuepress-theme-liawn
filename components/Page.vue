@@ -30,7 +30,7 @@ export default {
 .page
   padding-bottom 2rem
   display block
-  -webkit-transition padding 0.5s
-  -o-transition padding 0.5s
-  transition padding 0.5s
+  -webkit-transition padding .5s
+  -o-transition padding .5s
+  transition padding .5s
 </style>

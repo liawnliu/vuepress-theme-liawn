@@ -55,13 +55,13 @@ export default {
       line-height 1.7
       font-weight bold
     & > li:not(:first-child)
-      margin-top 0.75rem
+      margin-top .75rem
 
 @media (max-width: $MQMobile)
   .sidebar
     .nav-links
       display block
-      .dropdown-wrapper .nav-dropdown .dropdown-item;ulpadding0margin0list-style-typenoneadisplayinline-block.nav-linksdisplaynoneborder-bottom1pxsolid$borderColorpadding0.5rem00.75rem0afont-weight600.nav-item,.repo-linkdisplayblockline-height1.25remfont-size1.1empadding0.5rem00.5rem1.5rem.sidebar-linkspadding1.5rem0lia.sidebar-linkfont-size1.1emline-height1.7font-weightboldli a.router-link-active::after
+      .dropdown-wrapper .nav-dropdown .dropdown-item a.router-link-active::after
         top calc(1rem - 2px)
     & > .sidebar-links
       padding 1rem 0

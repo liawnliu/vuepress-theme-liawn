@@ -193,38 +193,9 @@ module.exports = {
      ```
    - 需要在`.eslintrc.js`的 extends 里的末尾**追加**`"@vue/prettier"`。
 
-4. css 代码风格需要使用`stylelint`，还要避免和`Prettier`冲突。
+4. VSCode 关于 Eslint 和 Prettier 的相关设置（上面是针对项目的，这里是针对编辑器本身的）
 
-   - `yarn add -D stylelint@13.13.1`。
-   - `yarn add -D stylelint-config-recess-order@3.0.0`。
-   - `yarn add -D stylelint-prettier@2.0.0`。
-   - `yarn add -D stylelint-config-prettier@9.0.3`。
-   - `echo "module.exports = {}" > .stylelintrc.js`创建配置文件`.stylelintrc.js`。
-
-     ```js
-     // .stylelintrc.js
-     module.exports = {
-       /* 继承公共配置 */
-       extends: ["stylelint-config-recess-order", "stylelint-prettier/recommended"],
-       /* 扩展 stylelint 原生rules 的种类 */
-       plugins: ["stylelint-prettier"],
-       /* 项目个性化的规则 */
-       rules: {
-         "selector-pseudo-element-no-unknown": [
-           true,
-           {
-             ignorePseudoElements: ["v-deep"],
-           },
-         ],
-         "prettier/prettier": true,
-         "number-leading-zero": "always",
-       },
-     };
-     ```
-
-5. VSCode 关于 Eslint 和 Prettier 和 Stylelint 的相关设置（上面是针对项目的，这里是针对编辑器本身的）
-
-   - 打开 VSCode 的“扩展”，输入“**Eslint**”、“**Prettier**”、“**Stylelint**”进行插件安装
+   - 打开 VSCode 的“扩展”，输入“**Eslint**”、“**Prettier**”进行插件安装
    - 在项目根目录下创建`.vscode`文件夹，然后新建一个 settings.json，内容参考如下，根据自身需要进行调整
      ```json
      // settings.json
@@ -275,18 +246,11 @@ module.exports = {
        "[markdown]": {
          "editor.defaultFormatter": "esbenp.prettier-vscode",
          "editor.formatOnSave": true
-       },
-       "css.validate": false,
-       "less.validate": false,
-       "scss.validate": false,
-       "stylelint.configFile": ".stylelintrc.js",
-       "stylelint.validate": ["css", "less", "postcss", "scss", "vue", "sass"],
-       // 要保证项目使用的ts是项目node_modules里的ts
-       "typescript.tsdk": "./node_modules/typescript/lib"
+       }
      }
      ```
 
-6. 编辑器的一些风格设置，可以为 VSCode 安装**EditorConfig 插件**，然后在项目根目录下新建`.editorconfig`文件，文件内容如下：
+5. 编辑器的一些风格设置，可以为 VSCode 安装**EditorConfig 插件**，然后在项目根目录下新建`.editorconfig`文件，文件内容如下：
 
    ```txt
     # https://editorconfig.org
@@ -305,12 +269,12 @@ module.exports = {
     trim_trailing_whitespace = false
    ```
 
-7. 为了保证代码提交时运行一些任务，需要使用 husky
+6. 为了保证代码提交时运行一些任务，需要使用 husky
 
    - `yarn add -D husky@7.0.4`
    - 然后用`yarn husky install`命令进行初始化（确保先`git init`），会生成`.husky`目录
 
-8. 代码提交前要做 lint 任务，需要使用 lint-staged
+7. 代码提交前要做 lint 任务，需要使用 lint-staged
 
    - `yarn add -D lint-staged@12.2.0`
    - 然后用`echo "module.exports = {}" > .lintstagedrc.js`生成配置文件`.lintstagedrc.js`
@@ -320,15 +284,13 @@ module.exports = {
    module.exports = {
      // 我们的eslint的extends包含了prettier，所以这里只需用到eslint --fix
      "*.{js,ts,vue,html}": "eslint --fix",
-     // 我们的stylelint的extends包含了prettier，所以这里只需用到stylelint --fix
-     "*.{vue,html,css,scss,less}": "stylelint --fix",
      // eslint和stylelint管不到的文件就用prettier --write
      "*.{json,md}": "prettier --write",
    };
    ```
 
-9. 需要将`lint-staged`添加到`husky`的提交前钩子里去，`yarn husky add .husky/pre-commit "yarn lint-staged"`，会在`.husky`下自动生成一个`pre-commit`文件
-10. 约束代码提交信息，需要使用 commitlint
+8. 需要将`lint-staged`添加到`husky`的提交前钩子里去，`yarn husky add .husky/pre-commit "yarn lint-staged"`，会在`.husky`下自动生成一个`pre-commit`文件
+9. 约束代码提交信息，需要使用 commitlint
 
 - `yarn add -D @commitlint/cli@16.0.2`
 - `yarn add -D @commitlint/config-conventional@16.0.0`

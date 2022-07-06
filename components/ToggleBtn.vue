@@ -24,5 +24,5 @@ export default {
         background-color #42b983
         margin-bottom 4px
         width 16px
-        height 2pxwidth18pxpadding10pxtext-aligncenteropacity.8-webkit-transitionleft.4s,right.4s-o-transitionleft.4s,right.4stransitionleft.4s,right.4scursor
+        height 2px
 </style>

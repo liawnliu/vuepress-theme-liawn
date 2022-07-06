@@ -45,10 +45,5 @@
   "[markdown]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnSave": true
-  },
-  "css.validate": false,
-  "less.validate": false,
-  "scss.validate": false,
-  "stylelint.configFile": ".stylelintrc.js",
-  "stylelint.validate": ["css", "less", "postcss", "scss", "vue", "sass"]
+  }
 }

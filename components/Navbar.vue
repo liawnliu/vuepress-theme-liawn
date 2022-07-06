@@ -130,5 +130,5 @@ $navbar-horizontal-padding = 1.5rem
       width calc(100vw - 9.4rem)
       overflow hidden
       white-space nowrap
-      text-overflow ellipsis0.7rem$navbar-horizontal-padding1.5rem.navbarpadding$navbar-vertical-padding$navbar-horizontal-paddingline-height$navbarHeight1.4rema,span,imgdisplayinline-block.logoheight$navbarHeight1.4remmin-width$navbarHeight1.4remmargin-right0.8remvertical-aligntop.site-namefont-size1.3remfont-weight600color$textColorpositionrelative.linkspadding-left1.5rembox-sizingborder-boxbackground-colorwhitewhite-spacenowrapfont-size0.9rempositionabsoluteright$navbar-horizontal-paddingtop$navbar-vertical-paddingdisplayflex.search-boxflex
+      text-overflow ellipsis
 </style>
