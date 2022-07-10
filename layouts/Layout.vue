@@ -108,7 +108,7 @@ export default {
     /* this.$router.afterEach(() => {
       this.isSidebarOpen = false
     }) */
-
+    // 左右侧边栏的打开状态
     let sidebarStatus = localStorage.getItem("sidebarStatus");
     if (sidebarStatus == null) {
       sidebarStatus = true;
@@ -116,6 +116,7 @@ export default {
     }
     this.isSidebarOpen = sidebarStatus;
 
+    // 移动端的宽度不够，所以每次只打开一个
     const isMobile = this.isMobile();
     console.log("isMobile", isMobile);
     let rightSidebarStatus = localStorage.getItem("rightSidebarStatus");
@@ -133,7 +134,7 @@ export default {
   },
   methods: {
     isMobile() {
-      const rect = document.body.getBoundingClientRect();
+      const rect = this.$root.$el.getBoundingClientRect();
       return rect.width - 1 < WIDTH;
     },
     resizeHandler() {

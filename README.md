@@ -1,16 +1,8 @@
 <h2 align="center">vuepress-theme-liawn</h2>
 
-## 介绍
-
-本人开发的[VuePress](https://v1.vuepress.vuejs.org/zh/)自定义主题`vuepress-theme-liawn`，它继承自`VuePress`默认主题`@vuepress/theme-default`，在此基础上新增了一个右侧侧边栏，用于展示**当前文章目录**，给左右两侧的侧边栏都加上了“折叠按钮”，对移动端做了一定的适配。
-
-[**更新日志**](https://github.com/liawnliu/vuepress-theme-liawn/releases)
-
-## 这个主题可以做什么？
-
-案例：[我的文档](https://liawnliu.github.io/blog-vuepress/)
-
 ## 安装
+
+PS：尽量使用最新版本（至少是`vuepress-theme-liawn@1.0.3`），早期版本有问题。
 
 ```bash
 yarn add -D vuepress-theme-liawn
@@ -18,126 +10,61 @@ yarn add -D vuepress-theme-liawn
 npm install -D vuepress-theme-liawn
 ```
 
-## vuepress 参考配置
+## 介绍
 
-vuepress-theme-liawn 本主题并没有自己的配置，本人只是建议参考用下面的 vuepress 配置
+本人开发的[VuePress](https://v1.vuepress.vuejs.org/zh/)自定义主题`vuepress-theme-liawn`。
 
-`docs/.vuepress/config.js`
+`vuepress`+`vuepress-theme-liawn`搭建的[blog](https://liawnliu.github.io/blog-vuepress/)，blog 代码在[这里](https://github.com/liawnliu/blog-vuepress)。
+
+- 功能
+
+  - 基础功能：继承了默认主题，那么默认主题的功能都有。
+  - 本自定义主题核心功能是提供了一个**右侧侧边栏**，用于展示本文的所有标题。所以左侧侧边栏最好禁止提取 header，但文章的所有标题要放到`$page.headers`了。具有怎么看下一小节——[配置](#配置)。
+  - 小功能：平滑滚动，其实是优化了 vuepress-plugin-smooth-scroll 并集成到我们这个主题里了。
+  - 小功能：页面滚动时更新左侧侧边栏的 active 以及 URL 里的 hash 值。那么就要一个滚动标准 targetTop，用于判断标题是否要更新到 URL 的 hash 里。至于右侧侧边栏的更新，RouterLink 会自动帮我们更新.router-link-active
+  - 小功能：给左右两侧加上“折叠”按钮。
+
+- 开发注意事项（如果你想自己开发一个主题的话）：
+
+  - 首先入口文件 index.js 里要继承`@vuepress/theme-default`
+  - 如果想修改默认主题的某个文件，可以将它以及它的目录复制到自定义主题里，一定要保证路径以及文件名要相同。然后对于这个文件里引用其他文件的写法要稍微修改一下，主要是将`@theme`改为`@parent-theme`（js 和 css 都是如此）。
+  - 要想使用数据，那么`this.$page`和`this.$site`是必不可少的，具体在控制台里打印它们吧。
+  - `document`和`window`的问题，它们只能在`mnouted`和`beforeMounte`里使用(因为 ssr)。如果只是操作 dom，建议使用`this.$root.$el`和`this.$parent.$el`以及`this.$el`。
+  - 参考资料：[官方文档-开发主题](https://v1.vuepress.vuejs.org/zh/theme/writing-a-theme.html)
+  - 参考主题：[vuepress-theme-yilia-plus.x](https://github.com/JoeyBling/vuepress-theme-yilia-plus)
+  - 参考主题：[vuepress-theme-vdoing](https://github.com/xugaoyi/vuepress-theme-vdoing)
+  - 参考主题：[vuepress-theme-reco-1.x](https://github.com/vuepress-reco/vuepress-theme-reco-1.x)
+
+[**更新日志**](https://github.com/liawnliu/vuepress-theme-liawn/releases)
+
+## 配置
 
 ```js
-const sidebar = require("./sidebar.js");
-
 module.exports = {
-  title: "Liawn's blog",
-  description: "用vuepress搭建的个人博客",
-  port: 4002,
-  head: [
-    ["meta", { charset: "UTF-8" }],
-    ["link", { rel: "icon", href: "/favicon.ico" }], // 增加一个自定义的 favicon(网页标签的图标)
-  ],
   markdown: {
-    lineNumbers: true, // 代码块显示行号
-    toc: { includeLevel: [2, 3, 4, 5] },
-    // markdown-it插件，解决相对路径中文图片问题
-    extendMarkdown: (md) => {
-      // yarn add markdown-it-disable-url-encode --dev
-      md.use(require("markdown-it-disable-url-encode"), "./");
-    },
+    // this.$page.headers里的标题层级
+    extractHeaders: ["h2", "h3", "h4", "h5", "h6"],
   },
-  plugins: [
-    // yarn add @vuepress/plugin-medium-zoom -D
-    "@vuepress/plugin-medium-zoom",
-    // yarn add vuepress-plugin-fulltext-search -D
-    "fulltext-search",
-  ],
   themeConfig: {
-    sidebarDepth: 0, // 0表示让左侧侧边栏禁止提取文章里的标题
-    lastUpdated: "上一次更新", // 文档更新时间：每个文件git最后提交的时间
-    displayAllHeaders: false, // 默认情况下，侧边栏只会显示由当前活动页面的标题（headers）组成的链接
-    activeHeaderLinks: false, // 当用户通过滚动查看页面的不同部分时，嵌套的标题链接和 URL 中的 Hash 值会实时更新
-    smoothScroll: true, // 启用滚动效果
-    sidebar, // 侧边栏
-    expandAllGroup: false,
-    // 导航栏
-    nav: [
-      { text: "Web", link: "/book-web/" },
-      { text: "生活", link: "/book-sketches/" },
-    ],
+    // 0表示让左侧侧边栏禁止提取文章里的标题。因为我们用了vuepress-theme-liawn，右侧会有文章所有标题，那么左侧就不应该再提取了
+    sidebarDepth: 0,
+    // vuepress-plugin-smooth-scroll有bug，这里关闭它然后在.vuepress/enhanceApp.js实现它
+    smoothScroll: false,
+    // vuepress-theme-liawn的配置项
     rightSidebar: {
-      mode: "dom",
-      dept: 6,
-      scope: ".page .content__default",
-      navbarHeight: 57.6,
+      // h1的padding-top + margin-top + a的margin-top。
+      // 当top小于等于targetTop时，当前header就更新到右侧侧边栏标题和 URL 中的 Hash 值
+      targetTop: 73.6 - 24 + 32 + 3.74,
+      // 用于解决vuepress-plugin-smooth-scroll问题，表示是否平滑滚动
+      smoothScroll: true,
     },
   },
 };
 ```
 
-`docs/.vuepress/sidebar.js`
+本人的 vuepress 配置可以看[config.js](https://github.com/liawnliu/blog-vuepress/blob/master/docs/.vuepress/config.js)和[sidebar.js](https://github.com/liawnliu/blog-vuepress/blob/master/docs/.vuepress/sidebar.js)
 
-```js
-module.exports = {
-  "/book-web/": [
-    {
-      title: "web前端",
-      collapsable: false, // 一直展开，不带有折叠功能
-      initialOpenGroupIndex: -1, // 默认是0表示展开第一项，现设置为-1表示初始化时全部折叠
-      children: [
-        {
-          title: "学习JavaScript",
-          path: "/book-web/html、css、js、ts/学习JavaScript/",
-          collapsable: true, // 具有折叠功能
-          children: [
-            "/book-web/html、css、js、ts/学习JavaScript/1.基础语法",
-            "/book-web/html、css、js、ts/学习JavaScript/2.变量、作用域和内存问题",
-          ],
-        },
-        {
-          title: "学习CSS",
-          collapsable: true,
-          path: "/book-web/html、css、js、ts/学习CSS/",
-          children: ["/book-web/html、css、js、ts/学习CSS/1.选择器"],
-        },
-        {
-          title: "学习TypeScript",
-          collapsable: true,
-          path: "/book-web/html、css、js、ts/学习TypeScript/",
-          children: ["/book-web/html、css、js、ts/学习TypeScript/1.typescript基础"],
-        },
-        {
-          title: "学习Vue",
-          collapsable: true,
-          path: "/book-web/web前端js框架/学习Vue/",
-          children: ["/book-web/web前端js框架/学习Vue/1.vue基础"],
-        },
-      ],
-    },
-    {
-      title: "常用工具",
-      collapsable: false,
-      children: ["/book-web/常用工具/Npm的使用", "/book-web/常用工具/Git的使用"],
-    },
-    {
-      title: "面试准备",
-      collapsable: false,
-      children: ["/book-web/面试准备/WEB前端面试"],
-    },
-  ],
-  // 第二个侧边栏，对应导航栏的第二项
-  "/book-sketches/": [
-    {
-      title: "电脑工具",
-      collapsable: false,
-      children: ["/book-sketches/电脑工具/win10下载与安装"],
-    },
-    {
-      title: "日常生活",
-      collapsable: false,
-      children: ["/book-sketches/日常生活/土味情话"],
-    },
-  ],
-};
-```
+不懂怎么使用 vuepress 的，可以看[官网教程-v1](https://v1.vuepress.vuejs.org/zh/)以及我写的[使用 vuepress 写 blog](https://liawnliu.github.io/blog-vuepress/book-web/常用工具/使用vuepress写blog.md)，特别是本人踩的一些坑——[常见问题](https://liawnliu.github.io/blog-vuepress/book-web/常用工具/使用vuepress写blog.md#常见问题)。
 
 ## LICENSE
 
