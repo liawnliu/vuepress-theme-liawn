@@ -1,5 +1,13 @@
 <h2 align="center">vuepress-theme-liawn</h2>
 
+## 最新说明
+
+2023年4月23日，旧博客[blog-vuepress](https://github.com/liawnliu/blog-vuepress)已迁移至新博客[blog-liawn](https://github.com/liawnliu/blog-liawn)，原[blog 入口](https://liawnliu.github.io/blog-vuepress/)变为新的[blog 入口](https://liawnliu.github.io/blog-liawn/)。
+
+旧博客是使用[vuepress@v1](https://v1.vuepress.vuejs.org/zh/)搭建的，需要自己解决一些问题并且还自己制作了[右侧边栏vuepress-theme-liawn](https://github.com/liawnliu/vuepress-theme-liawn)；新博客使用[vitepress@v1.0.0-alpha.73](https://vitepress.dev/)搭建的，它自带的主题解决了那些问题，并且还自带右侧边栏，主要还是加快了启动速度，但内存问题还是存在，后面应该会得到解决。
+
+也就说，本插件不再有什么存在的意义了，到适当时机会隐藏本项目。vue团队在文档这一块已经将重心从vuepress移到了vitepress，即使是vuepress@v2也靠后了。
+
 ## 安装
 
 PS：尽量使用最新版本（至少是`vuepress-theme-liawn@1.0.3`），早期版本有问题。
